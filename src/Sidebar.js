@@ -10,10 +10,10 @@ const DIRECTION = {
 
 function Sidebar({ menuItems }) {
   const [history, setHistory] = useState([]);
-  const [active, setActive] = useState(menuItems);
+  const [activeItem, setActive] = useState(menuItems);
   const [direction, setDirection] = useState(DIRECTION.FORWARD);
 
-  const { children } = active;
+  const { children } = activeItem;
 
   function handleClick(item, newDirection = DIRECTION.FORWARD) {
     setDirection(newDirection);
@@ -28,14 +28,14 @@ function Sidebar({ menuItems }) {
     if (newDirection === DIRECTION.BACKWARD) {
       newHistory.shift();
     } else {
-      newHistory.unshift(active);
+      newHistory.unshift(activeItem);
     }
 
     setHistory(newHistory);
     setActive(item);
   }
 
-  const transitions = useTransition(active, (item) => item.uuid, {
+  const transitions = useTransition(activeItem, (item) => item.uuid, {
     from:
       direction === DIRECTION.FORWARD
         ? { opacity: 0, transform: 'translate3d(100%,0,0)' }

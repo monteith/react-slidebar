@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { assignUuids } from '../src/assignUuids';
-import Sidebar from '../src/index';
+import Sidebar from '../src/Sidebar';
 import './index.css';
 
 const menuItems = assignUuids({
