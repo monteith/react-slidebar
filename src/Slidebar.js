@@ -8,7 +8,7 @@ const DIRECTION = {
   BACKWARD: 'backward',
 };
 
-function Sidebar({ menuItems }) {
+function Slidebar({ menuItems }) {
   const [history, setHistory] = useState([]);
   const [activeItem, setActive] = useState(menuItems);
   const [direction, setDirection] = useState(DIRECTION.FORWARD);
@@ -82,4 +82,4 @@ function Sidebar({ menuItems }) {
   );
 }
 
-export default Sidebar;
+export default Slidebar;

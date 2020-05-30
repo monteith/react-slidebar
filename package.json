@@ -2,7 +2,7 @@
   "name": "react-slidebar",
   "version": "1.0.0",
   "description": "React UI component for \"sidebar\" with \"slide\" transition between nested menu items",
-  "main": "src/index.js",
+  "main": "src/Slidebar.js",
   "scripts": {
     "dev": "parcel demo/index.html -d .devserver --no-cache",
     "build": "rollup --config",

@@ -11,7 +11,7 @@ const pluginReplaceEnvProduction = replace({
 });
 
 const COMMON_INPUT = {
-  input: './src/Sidebar.js',
+  input: './src/Slidebar.js',
   external: ['react', 'react-dom', 'prop-types', 'react-spring'],
 };
 

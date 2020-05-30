@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { assignUuids } from '../src/assignUuids';
-import Sidebar from '../src/Sidebar';
+import Slidebar from '../src/Slidebar';
 import './index.css';
 
 const menuItems = assignUuids({
@@ -39,7 +39,7 @@ function App() {
   return (
     <div className="fake-application">
       <div className="sidebar-wrapper">
-        <Sidebar menuItems={menuItems} />
+        <Slidebar menuItems={menuItems} />
       </div>
     </div>
   );
