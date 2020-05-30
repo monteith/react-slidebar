@@ -1,0 +1,47 @@
+.sidebar button.-link {
+  background: none;
+  border: none;
+  padding: 0 !important;
+  font-family: arial, sans-serif;
+  color: #069;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.toolbar {
+  height: 5vh;
+  left: 0;
+  overflow: hidden;
+  padding: 1rem;
+  position: absolute;
+  text-align: center;
+  top: 0vh;
+
+  z-index: 100;
+}
+
+.menuItems {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 66%;
+  justify-content: flex-start;
+  position: absolute;
+  left: 0%;
+  top: 5vh;
+  width: 100%;
+  transition: left 200ms ease-in;
+}
+
+.menuItems.-next {
+  left: 100%;
+}
+
+.menuItems.-prev {
+  left: -100%;
+  transition: left 200ms ease-in;
+}
+
+.menuItem {
+  margin-top: 1rem;
+}
