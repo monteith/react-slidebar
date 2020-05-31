@@ -1,7 +1,7 @@
-import styled from '@emotion/styled';
-import React from 'react';
-import { animated } from 'react-spring';
-import MenuItem from './MenuItem';
+import styled from '@emotion/styled'
+import React from 'react'
+import { animated } from 'react-spring'
+import MenuItem from './MenuItem'
 
 const StyledMenuItems = styled(animated.div)`
   align-items: center;
@@ -12,12 +12,12 @@ const StyledMenuItems = styled(animated.div)`
   position: absolute;
   top: 3rem;
   width: 100%;
-`;
+`
 
 function MenuItems({ items, transitions, itemOnClick }) {
   return transitions.map(({ item, props, key }) => (
     <StyledMenuItems
-      className="menuItems"
+      className='menuItems'
       key={key}
       style={props}
       data-uuid={item.uuid}
@@ -26,7 +26,7 @@ function MenuItems({ items, transitions, itemOnClick }) {
         <MenuItem handleClick={itemOnClick} item={child} key={child.uuid} />
       ))}
     </StyledMenuItems>
-  ));
+  ))
 }
 
-export default MenuItems;
+export default MenuItems
