@@ -1,12 +1,15 @@
+import styled from '@emotion/styled';
 import React, { useState } from 'react';
-import { animated, useTransition } from 'react-spring';
-import MenuItem from './MenuItem';
-import './styles.css';
+import { useTransition } from 'react-spring';
+import MenuItems from './MenuItems';
+import Toolbar from './Toolbar';
 
 const DIRECTION = {
   FORWARD: 'forward',
   BACKWARD: 'backward',
 };
+
+const StyledSlidebar = styled.div``;
 
 function Sidebar({ menuItems }) {
   const [history, setHistory] = useState([]);
@@ -48,37 +51,19 @@ function Sidebar({ menuItems }) {
   });
 
   return (
-    <div className="sidebar">
+    <StyledSlidebar className="sidebar">
       {history[0] && (
-        <div className="toolbar">
-          <button
-            className="-link"
-            onClick={() => handleClick(history[0], DIRECTION.BACKWARD)}
-          >
-            &larr;
-            {history[0].name}
-          </button>
-        </div>
+        <Toolbar
+          backAction={() => handleClick(history[0], DIRECTION.BACKWARD)}
+          itemName={history[0].name}
+        />
       )}
-      {transitions.map(({ item, props, key }) => {
-        return (
-          <animated.div
-            className="menuItems"
-            key={key}
-            style={props}
-            data-uuid={item.uuid}
-          >
-            {children.map((child) => (
-              <MenuItem
-                handleClick={() => handleClick(child)}
-                item={child}
-                key={child.uuid}
-              />
-            ))}
-          </animated.div>
-        );
-      })}
-    </div>
+      <MenuItems
+        items={children}
+        itemOnClick={handleClick}
+        transitions={transitions}
+      />
+    </StyledSlidebar>
   );
 }
 
