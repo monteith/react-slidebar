@@ -42,7 +42,7 @@ const Layout = () => (
         <article>
           <h2>Basic Example</h2>
           <div className='example-wrapper'>
-            <Slidebar menuItems={menuItems} />
+            <Slidebar rootNode={menuItems} />
           </div>
         </article>
       </section>

@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import React, { useState } from 'react'
 import { useTransition } from 'react-spring'
+import { nodeType } from '../helpers/types'
 import MenuItems from './MenuItems'
 import Toolbar from './Toolbar'
 
@@ -12,10 +13,13 @@ const DIRECTION = {
 const StyledSlidebar = styled.div`
   position: relative;
 `
+Slidebar.propTypes = {
+  rootNode: nodeType
+}
 
-function Slidebar({ menuItems }) {
+function Slidebar({ rootNode }) {
   const [history, setHistory] = useState([])
-  const [activeItem, setActive] = useState(menuItems)
+  const [activeItem, setActive] = useState(rootNode)
   const [direction, setDirection] = useState(DIRECTION.FORWARD)
 
   const { children } = activeItem

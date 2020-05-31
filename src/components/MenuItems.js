@@ -1,6 +1,8 @@
 import styled from '@emotion/styled'
+import { arrayOf, func, object } from 'prop-types'
 import React from 'react'
 import { animated } from 'react-spring'
+import { nodeType } from '../helpers/types'
 import MenuItem from './MenuItem'
 
 const StyledMenuItems = styled(animated.div)`
@@ -13,6 +15,12 @@ const StyledMenuItems = styled(animated.div)`
   top: 3rem;
   width: 100%;
 `
+
+MenuItems.propTypes = {
+  items: arrayOf(nodeType).isRequired,
+  transitions: arrayOf(object).isRequired,
+  itemOnClick: func.isRequired
+}
 
 function MenuItems({ items, transitions, itemOnClick }) {
   return transitions.map(({ item, props, key }) => (
