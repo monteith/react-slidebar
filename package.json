@@ -2,7 +2,8 @@
   "name": "react-slidebar",
   "version": "1.0.0",
   "description": "React UI component for \"sidebar\" with \"slide\" transition between nested menu items",
-  "main": "src/Slidebar.js",
+  "main": "dist/react-slidebar.umd.js",
+  "unpkg": "dist/react-slider.umd.min.js",
   "scripts": {
     "dev": "parcel demo/index.html -d .devserver --no-cache",
     "build": "rollup --config",
@@ -52,9 +53,6 @@
     ]
   },
   "dependencies": {
-    "@emotion/core": "10.0.28",
-    "@emotion/styled": "10.0.27",
-    "@types/jest": "25.2.3",
     "prop-types": "15.7.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
@@ -69,6 +67,7 @@
     "@babel/core": "7.10.2",
     "@babel/preset-env": "7.10.2",
     "@babel/preset-react": "7.10.1",
+    "@emotion/styled": "10.0.27",
     "@rollup/plugin-babel": "5.0.2",
     "@rollup/plugin-node-resolve": "8.0.0",
     "@rollup/plugin-replace": "2.3.2",
