@@ -1,7 +1,7 @@
-import { ExampleComponent } from '.'
+import { Slidebar } from './index'
 
-describe('ExampleComponent', () => {
+describe('Slidebar', () => {
   it('is truthy', () => {
-    expect(ExampleComponent).toBeTruthy()
+    expect(Slidebar).toBeTruthy()
   })
 })
