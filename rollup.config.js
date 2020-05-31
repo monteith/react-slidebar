@@ -12,7 +12,13 @@ const pluginReplaceEnvProduction = replace({
 
 const COMMON_INPUT = {
   input: './src/Slidebar.js',
-  external: ['react', 'react-dom', 'prop-types', 'react-spring'],
+  external: [
+    'react',
+    'react-dom',
+    'prop-types',
+    'react-spring',
+    '@emotion/styled',
+  ],
 };
 
 const COMMON_OUTPUT = {
@@ -22,7 +28,9 @@ const COMMON_OUTPUT = {
   globals: {
     react: 'React',
     'react-dom': 'ReactDOM',
+    'react-spring': 'ReactSpring',
     'prop-types': 'PropTypes',
+    '@emotion/styled': 'styled',
   },
 };
 
@@ -55,8 +63,8 @@ export default [
     plugins: [pluginBabel, pluginResolve],
     output: {
       ...COMMON_OUTPUT,
-      format: 'esm',
-      file: './dist/react-slidebar.esm.js',
+      format: 'es',
+      file: './dist/react-slidebar.es.js',
     },
   },
 ];
