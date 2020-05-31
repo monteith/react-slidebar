@@ -9,7 +9,9 @@ const DIRECTION = {
   BACKWARD: 'backward'
 }
 
-const StyledSlidebar = styled.div``
+const StyledSlidebar = styled.div`
+  position: relative;
+`
 
 function Slidebar({ menuItems }) {
   const [history, setHistory] = useState([])

@@ -12,3 +12,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+main,
+header {
+  margin: 0 auto;
+  width: 80vh;
+}
+
+article {
+  margin: 0 0 2rem;
+}
+
+.example-wrapper {
+  border: 1px solid #efefef;
+  height: 30vh;
+  padding: 2rem;
+}
