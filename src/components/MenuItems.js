@@ -12,13 +12,13 @@ const StyledMenuItems = styled(animated.div)`
   justify-content: flex-start;
   left: 0%;
   position: absolute;
-  top: 3rem;
+  top: 5rem;
   width: 100%;
 `
 
 function MenuItems() {
   const { state, setState } = useSlidebarContext()
-  const { activeItem, direction } = state
+  const { activeItem, direction, callbacks, firstRender } = state
 
   const transitions = useTransition(
     activeItem,
@@ -28,23 +28,26 @@ function MenuItems() {
         direction === DIRECTION.FORWARD
           ? { opacity: 0, transform: 'translate3d(100%,0,0)' }
           : { opacity: 0, transform: 'translate3d(-50%, 0, 0)' },
-      enter: { opacity: 1, transform: 'translate3d(0%,0,0)' },
-      leave:
-        direction === DIRECTION.FORWARD
-          ? { opacity: 0, transform: 'translate3d(-50%,0,0)' }
-          : { opacity: 0, transform: 'translate3d(100%,0,0)' }
+      enter: (item) => async (next, cancel) => {
+        if (callbacks.before && !firstRender) {
+          callbacks.before(item)
+        } else if (firstRender) {
+          setState({ ...state, firstRender: false })
+        }
+        await next({ opacity: 1, transform: 'translate3d(0%,0,0)' })
+      },
+      leave: (item) => async (next, cancel) => {
+        const values =
+          direction === DIRECTION.FORWARD
+            ? { opacity: 0, transform: 'translate3d(-50%,0,0)' }
+            : { opacity: 0, transform: 'translate3d(100%,0,0)' }
+        await next(values)
+        if (callbacks.after) {
+          callbacks.after(item)
+        }
+      }
     }
   )
-
-  function handleClick(item) {
-    const newHistory = [activeItem, ...state.history]
-    setState({
-      ...state,
-      history: newHistory,
-      activeItem: item,
-      direction: DIRECTION.FORWARD
-    })
-  }
 
   const items = state.activeItem.children
 
@@ -56,11 +59,7 @@ function MenuItems() {
       data-uuid={item.uuid}
     >
       {items.map((child) => (
-        <MenuItem
-          handleClick={() => handleClick(child)}
-          item={child}
-          key={child.uuid}
-        />
+        <MenuItem item={child} key={child.uuid} />
       ))}
     </StyledMenuItems>
   ))
