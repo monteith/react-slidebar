@@ -1,6 +1,8 @@
 import styled from '@emotion/styled'
 import React from 'react'
-import { animated } from 'react-spring'
+import { animated, useTransition } from 'react-spring'
+import { DIRECTION } from '../helpers/const'
+import { useSlidebarContext } from './SlidebarContext'
 import MenuItem from './MenuItem'
 
 const StyledMenuItems = styled(animated.div)`
@@ -14,7 +16,38 @@ const StyledMenuItems = styled(animated.div)`
   width: 100%;
 `
 
-function MenuItems({ items, transitions, itemOnClick }) {
+function MenuItems() {
+  const { state, setState } = useSlidebarContext()
+  const { activeItem, direction } = state
+
+  const transitions = useTransition(
+    activeItem,
+    (activeItem) => activeItem.uuid,
+    {
+      from:
+        direction === DIRECTION.FORWARD
+          ? { opacity: 0, transform: 'translate3d(100%,0,0)' }
+          : { opacity: 0, transform: 'translate3d(-50%, 0, 0)' },
+      enter: { opacity: 1, transform: 'translate3d(0%,0,0)' },
+      leave:
+        direction === DIRECTION.FORWARD
+          ? { opacity: 0, transform: 'translate3d(-50%,0,0)' }
+          : { opacity: 0, transform: 'translate3d(100%,0,0)' }
+    }
+  )
+
+  function handleClick(item) {
+    const newHistory = [activeItem, ...state.history]
+    setState({
+      ...state,
+      history: newHistory,
+      activeItem: item,
+      direction: DIRECTION.FORWARD
+    })
+  }
+
+  const items = state.activeItem.children
+
   return transitions.map(({ item, props, key }) => (
     <StyledMenuItems
       className='menuItems'
@@ -23,7 +56,11 @@ function MenuItems({ items, transitions, itemOnClick }) {
       data-uuid={item.uuid}
     >
       {items.map((child) => (
-        <MenuItem handleClick={itemOnClick} item={child} key={child.uuid} />
+        <MenuItem
+          handleClick={() => handleClick(child)}
+          item={child}
+          key={child.uuid}
+        />
       ))}
     </StyledMenuItems>
   ))
