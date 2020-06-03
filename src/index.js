@@ -1,85 +1,19 @@
-import React, { useState } from 'react';
-import { animated, useTransition } from 'react-spring';
-import MenuItem from './MenuItem';
-import './styles.css';
+import React, { useMemo } from 'react'
+import Slidebar from './components/Slidebar'
+import { assignUuids } from './helpers/assignUuids'
 
-const DIRECTION = {
-  FORWARD: 'forward',
-  BACKWARD: 'backward',
-};
-
-function Sidebar({ menuItems }) {
-  const [history, setHistory] = useState([]);
-  const [active, setActive] = useState(menuItems);
-  const [direction, setDirection] = useState(DIRECTION.FORWARD);
-
-  const { children } = active;
-
-  function handleClick(item, newDirection = DIRECTION.FORWARD) {
-    setDirection(newDirection);
-
-    if (!item.children || typeof item.action === 'function') {
-      item.action.call(item);
-      return;
-    }
-
-    let newHistory = history;
-
-    if (newDirection === DIRECTION.BACKWARD) {
-      newHistory.shift();
-    } else {
-      newHistory.unshift(active);
-    }
-
-    setHistory(newHistory);
-    setActive(item);
+export default function ({ rootNode, callbacks, options }) {
+  if (!rootNode || !rootNode.children) {
+    throw new Error(
+      `react-slidebar: prop "rootNode" should be an object with a "children" attribute`
+    )
   }
-
-  const transitions = useTransition(active, (item) => item.uuid, {
-    from:
-      direction === DIRECTION.FORWARD
-        ? { opacity: 0, transform: 'translate3d(100%,0,0)' }
-        : { opacity: 0, transform: 'translate3d(-50%, 0, 0)' },
-    enter: { opacity: 1, transform: 'translate3d(0%,0,0)' },
-    leave:
-      direction === DIRECTION.FORWARD
-        ? { opacity: 0, transform: 'translate3d(-50%,0,0)' }
-        : { opacity: 0, transform: 'translate3d(100%,0,0)' },
-  });
-
+  const itemsWithUuid = useMemo(() => assignUuids(rootNode))
   return (
-    <div className="sidebar">
-      {history[0] && (
-        <div className="toolbar">
-          <button
-            className="-link"
-            onClick={() => handleClick(history[0], DIRECTION.BACKWARD)}
-          >
-            &larr;
-            {history[0].name}
-          </button>
-        </div>
-      )}
-      {transitions.map(({ item, props, key }) => {
-        return (
-          <animated.div
-            className="menuItems"
-            key={key}
-            style={props}
-            data-uuid={item.uuid}
-          >
-            {children.map((child) => (
-              <MenuItem
-                handleClick={() => handleClick(child)}
-                item={child}
-                key={child.uuid}
-              />
-            ))}
-          </animated.div>
-        );
-      })}
-    </div>
-  );
+    <Slidebar
+      rootNode={itemsWithUuid}
+      callbacks={callbacks}
+      options={options}
+    />
+  )
 }
-
-export default Sidebar;
