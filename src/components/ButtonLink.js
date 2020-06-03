@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import React from 'react'
-
+import { useSlidebarOptions } from './SlidebarContext'
 const StyledButton = styled.button`
   background: none;
   border: none;
@@ -12,8 +12,12 @@ const StyledButton = styled.button`
 `
 
 function ButtonLink({ children, onClick }) {
+  const { classNames } = useSlidebarOptions()
   return (
-    <StyledButton className='-link' onClick={onClick}>
+    <StyledButton
+      className={`-link ${classNames.Button || ''}`}
+      onClick={onClick}
+    >
       {children}
     </StyledButton>
   )

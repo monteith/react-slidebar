@@ -1,12 +1,17 @@
 import React, { createContext, useState, useMemo, useContext } from 'react'
 import { DIRECTION } from '../helpers/const'
 
-const SlidebarContext = createContext()
+const defaultOptions = {
+  callbacks: {},
+  classNames: {}
+}
 
-function SlidebarProvider({ rootNode, callbacks, ...props }) {
+const SlidebarContext = createContext()
+const OptionsContext = createContext(defaultOptions)
+
+function SlidebarProvider({ rootNode, ...props }) {
   const [state, setState] = useState({
     activeItem: rootNode,
-    callbacks: callbacks || {},
     firstRender: true,
     history: [],
     direction: DIRECTION.FORWARD
@@ -18,6 +23,19 @@ function SlidebarProvider({ rootNode, callbacks, ...props }) {
 export function useSlidebarContext() {
   const [state, setState] = useContext(SlidebarContext)
   return { state, setState }
+}
+
+export function OptionsProvider({ options, ...props }) {
+  const value = useMemo(() => ({ ...defaultOptions, ...options }), [
+    defaultOptions,
+    options
+  ])
+  return <OptionsContext.Provider value={value} {...props} />
+}
+
+export function useSlidebarOptions() {
+  const options = useContext(OptionsContext)
+  return options
 }
 
 export default SlidebarProvider

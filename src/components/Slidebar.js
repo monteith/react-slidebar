@@ -1,6 +1,10 @@
 import styled from '@emotion/styled'
 import React from 'react'
-import SlidebarProvider, { useSlidebarContext } from './SlidebarContext'
+import SlidebarProvider, {
+  OptionsProvider,
+  useSlidebarOptions,
+  useSlidebarContext
+} from './SlidebarContext'
 import MenuItems from './MenuItems'
 import Toolbar from './Toolbar'
 
@@ -32,19 +36,22 @@ function Body() {
 }
 
 function Slidebar() {
+  const { classNames } = useSlidebarOptions()
   return (
-    <StyledSlidebar className='sidebar'>
+    <StyledSlidebar className={`sidebar ${classNames.Slidebar}`}>
       <Toolbar />
       <Body />
     </StyledSlidebar>
   )
 }
 
-function Main({ rootNode, callbacks }) {
+function Main({ rootNode, options }) {
   return (
-    <SlidebarProvider rootNode={rootNode} callbacks={callbacks}>
-      <Slidebar />
-    </SlidebarProvider>
+    <OptionsProvider options={options}>
+      <SlidebarProvider rootNode={rootNode}>
+        <Slidebar />
+      </SlidebarProvider>
+    </OptionsProvider>
   )
 }
 

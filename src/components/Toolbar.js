@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import React from 'react'
-import { useSlidebarContext } from './SlidebarContext'
+import { useSlidebarContext, useSlidebarOptions } from './SlidebarContext'
 import { DIRECTION } from '../helpers/const'
 import ButtonLink from './ButtonLink'
 
@@ -24,7 +24,7 @@ function Title({ children }) {
 function Toolbar() {
   const { state, setState } = useSlidebarContext()
   const { history, activeItem } = state
-
+  const { classNames } = useSlidebarOptions()
   const item = history[0]
 
   function backAction() {
@@ -39,7 +39,7 @@ function Toolbar() {
   }
 
   return (
-    <StyledToolbar className='toolbar'>
+    <StyledToolbar className={`toolbar ${classNames.Toolbar || ''}`}>
       <div className='toolbar-button'>
         {history[0] && (
           <ButtonLink onClick={backAction}>
