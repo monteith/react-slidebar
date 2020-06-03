@@ -8,24 +8,44 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-pre {
-  background-color: #efefef;
-  border: 1px solid #ccc;
-  color: #232323;
-}
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
 main,
 header {
   margin: 0 auto;
   width: 80vh;
 }
 
+header > h1 {
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+section {
+  border-bottom: 1px solid #efefef;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+}
+
 article {
   margin: 0 0 2rem;
+}
+
+article > h2 {
+  font-weight: 500;
+}
+
+article > h3 {
+  font-weight: 500;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+pre {
+  background-color: #efefef;
+  border: 1px solid #ccc;
+  color: #232323;
 }
 
 .example-wrapper {
@@ -33,4 +53,7 @@ article {
   height: 30vh;
   margin-bottom: 2rem;
   padding: 2rem;
+}
+
+.sidebar {
 }
