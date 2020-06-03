@@ -44,9 +44,18 @@ const Layout = () => (
           <div className='example-wrapper'>
             <Slidebar
               rootNode={menuItems}
-              callbacks={{
-                before: (item) => console.log('before', item.name),
-                after: (item) => console.log('after', item.name)
+              options={{
+                classNames: {
+                  Slidebar: 'custom',
+                  MenuItems: 'menuItems2',
+                  MenuItem: 'menuItem2',
+                  Toolbar: 'toolbar2',
+                  Button: 'button2'
+                },
+                callbacks: {
+                  before: (item) => console.log('before', item.name),
+                  after: (item) => console.log('after', item.name)
+                }
               }}
             />
           </div>
