@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import React from 'react'
 import { animated, useTransition } from 'react-spring'
 import { DIRECTION } from '../helpers/const'
-import { useSlidebarContext } from './SlidebarContext'
+import { useSlidebarContext, useSlidebarOptions } from './SlidebarContext'
 import MenuItem from './MenuItem'
 
 const StyledMenuItems = styled(animated.div)`
@@ -18,8 +18,8 @@ const StyledMenuItems = styled(animated.div)`
 
 function MenuItems() {
   const { state, setState } = useSlidebarContext()
-  const { activeItem, direction, callbacks, firstRender } = state
-
+  const { activeItem, direction, firstRender } = state
+  const { callbacks, classNames } = useSlidebarOptions()
   const transitions = useTransition(
     activeItem,
     (activeItem) => activeItem.uuid,
@@ -53,7 +53,7 @@ function MenuItems() {
 
   return transitions.map(({ item, props, key }) => (
     <StyledMenuItems
-      className='menuItems'
+      className={`menuItems ${classNames.MenuItems || ''}`}
       key={key}
       style={props}
       data-uuid={item.uuid}

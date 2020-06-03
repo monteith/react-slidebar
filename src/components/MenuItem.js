@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import React from 'react'
 import { DIRECTION } from '../helpers/const'
-import { useSlidebarContext } from './SlidebarContext'
+import { useSlidebarContext, useSlidebarOptions } from './SlidebarContext'
 import ButtonLink from './ButtonLink'
 
 const StyledWrapper = styled.div`
@@ -10,6 +10,7 @@ const StyledWrapper = styled.div`
 
 function MenuItem({ item }) {
   const { state, setState } = useSlidebarContext()
+  const { classNames } = useSlidebarOptions()
   const { activeItem, history } = state
 
   function handleClick() {
@@ -31,7 +32,10 @@ function MenuItem({ item }) {
     })
   }
   return (
-    <StyledWrapper className='menuItem' data-uuid={item.uuid}>
+    <StyledWrapper
+      className={`menuItem ${classNames.MenuItem || ''}`}
+      data-uuid={item.uuid}
+    >
       <ButtonLink onClick={handleClick}>{item.name}</ButtonLink>
     </StyledWrapper>
   )
