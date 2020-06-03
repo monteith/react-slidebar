@@ -3,9 +3,11 @@ import { DIRECTION } from '../helpers/const'
 
 const SlidebarContext = createContext()
 
-function SlidebarProvider({ rootNode, ...props }) {
+function SlidebarProvider({ rootNode, callbacks, ...props }) {
   const [state, setState] = useState({
     activeItem: rootNode,
+    callbacks: callbacks || {},
+    firstRender: true,
     history: [],
     direction: DIRECTION.FORWARD
   })

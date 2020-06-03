@@ -5,17 +5,25 @@ import { DIRECTION } from '../helpers/const'
 import ButtonLink from './ButtonLink'
 
 const StyledToolbar = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   padding: 1rem;
-  text-align: left;
+  .toolbar-button {
+    display: flex;
+    align-content: center;
+  }
+  h1 {
+    text-align: center;
+  }
 `
+
+function Title({ children }) {
+  return <h1>{children}</h1>
+}
 
 function Toolbar() {
   const { state, setState } = useSlidebarContext()
-  const { history } = state
-
-  if (!history[0]) {
-    return null
-  }
+  const { history, activeItem } = state
 
   const item = history[0]
 
@@ -32,10 +40,15 @@ function Toolbar() {
 
   return (
     <StyledToolbar className='toolbar'>
-      <ButtonLink onClick={backAction}>
-        &larr;
-        {item.name}
-      </ButtonLink>
+      <div className='toolbar-button'>
+        {history[0] && (
+          <ButtonLink onClick={backAction}>
+            &larr;
+            {item.name}
+          </ButtonLink>
+        )}
+      </div>
+      <Title>{activeItem.name}</Title>
     </StyledToolbar>
   )
 }
