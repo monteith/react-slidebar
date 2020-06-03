@@ -38,7 +38,7 @@ function Body() {
 function Slidebar() {
   const { classNames } = useSlidebarOptions()
   return (
-    <StyledSlidebar className={`sidebar ${classNames.Slidebar}`}>
+    <StyledSlidebar className={`sidebar ${classNames.Slidebar || ''}`}>
       <Toolbar />
       <Body />
     </StyledSlidebar>

@@ -8,6 +8,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+pre {
+  background-color: #efefef;
+  border: 1px solid #ccc;
+  color: #232323;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -26,5 +31,6 @@ article {
 .example-wrapper {
   border: 1px solid #efefef;
   height: 30vh;
+  margin-bottom: 2rem;
   padding: 2rem;
 }

@@ -4,7 +4,7 @@
   "description": "React UI component for creating nested menus with sliding transitions",
   "author": "monteith",
   "license": "MIT",
-  "repository": "monteith/react-slider",
+  "repository": "monteith/react-slidebar",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.js",
