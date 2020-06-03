@@ -10,16 +10,16 @@ const menuItems = {
         {
           name: 'Menu a',
           children: [
-            { name: 'Menu d', children: [] },
+            { name: 'Menu d', callback: (item) => console.log(item.name) },
             {
               name: 'Menu e',
               children: [
-                { name: 'Menu g' },
-                { name: 'Menu h' },
-                { name: 'Menu i' }
+                { name: 'Menu g', component: () => <h1>Menu G</h1> },
+                { name: 'Menu h', component: () => <h1>Menu H</h1> },
+                { name: 'Menu i', component: () => <h1>Menu I</h1> }
               ]
             },
-            { name: 'Menu f', children: [] }
+            { name: 'Menu f', callback: (item) => console.log(item.name) }
           ]
         },
         { name: 'Menu b', children: [] },
