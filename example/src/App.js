@@ -42,7 +42,13 @@ const Layout = () => (
         <article>
           <h2>Basic Example</h2>
           <div className='example-wrapper'>
-            <Slidebar rootNode={menuItems} />
+            <Slidebar
+              rootNode={menuItems}
+              callbacks={{
+                before: (item) => console.log('before', item.name),
+                after: (item) => console.log('after', item.name)
+              }}
+            />
           </div>
         </article>
       </section>
