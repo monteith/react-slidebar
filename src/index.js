@@ -20,8 +20,6 @@ function initSlidebar({ children, title, options, ...props }) {
   const type = getSlidebarType(rootNode.props.children)
   const nodeTree = assignUuids(rootNode)
 
-  console.log(type)
-
   if (!rootNode) {
     throw new Error('A <SlidebarRoot/> must be provided')
   } else if (!rootNode.props.children) {
