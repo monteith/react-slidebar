@@ -1,19 +1,23 @@
-function uuid() {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-    var r = (Math.random() * 16) | 0
-    var v = c === 'x' ? r : (r & 0x3) | 0x8
-    return v.toString(16)
-  })
-}
+import React from 'react'
+import uuid from './uuid'
 
-export function assignUuids(rootNode) {
-  const result = { ...rootNode, uuid: uuid() }
-
-  if (!rootNode.children) {
-    return result
+export default function assignUuids(rootElement) {
+  const props = {
+    ...rootElement.props,
+    _uuid: uuid()
   }
 
-  result.children = rootNode.children.map((child) => assignUuids(child))
+  if (typeof rootElement === 'string') {
+    return rootElement
+  }
 
-  return result
+  if (rootElement.props.children) {
+    props.children = React.Children.map(rootElement.props.children, (child) =>
+      assignUuids(child)
+    )
+  }
+
+  return React.cloneElement(rootElement, {
+    ...props
+  })
 }

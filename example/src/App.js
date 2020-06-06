@@ -1,189 +1,80 @@
 import React from 'react'
-import Slidebar from 'react-slidebar'
+import Slidebar, {
+  SlidebarRoot,
+  SlidebarPage,
+  SlidebarNode,
+  SlidebarHeader
+} from 'react-slidebar'
 
-import exampleBasic from './data/example-basic'
-import exampleWithComponents from './data/example-with-components'
-import exampleWithCallback from './data/example-with-callback'
+function PagesExample() {
+  return (
+    <Slidebar>
+      <SlidebarHeader />
+      <SlidebarRoot>
+        <SlidebarPage title='Page 1'>
+          <h1>hi</h1>
+          <SlidebarPage.BackButton />
+          <SlidebarPage.NextButton />
+        </SlidebarPage>
+        <SlidebarPage title='Page 2'>
+          <h1>hello</h1>
+          <SlidebarPage.BackButton />
+          <SlidebarPage.NextButton />
+        </SlidebarPage>
+        <SlidebarPage title='Page 3'>
+          <h1>how are you</h1>
+          <SlidebarPage.BackButton />
+          <SlidebarPage.NextButton />
+        </SlidebarPage>
+      </SlidebarRoot>
+    </Slidebar>
+  )
+}
 
-const Layout = () => (
-  <>
-    <header>
-      <h1>Examples</h1>
-    </header>
-    <main>
-      <section>
-        <article>
-          <h2>Basic Example</h2>
-          <div className='example-wrapper'>
-            <Slidebar rootNode={exampleBasic} />
-          </div>
-          <h3>Component Props</h3>
-          <pre>
-            <code>{`
+function NodesExample() {
+  return (
+    <Slidebar>
+      <SlidebarHeader />
+      <SlidebarRoot title='home'>
+        <SlidebarNode title='a'>
+          <SlidebarNode title='a1'>
+            <SlidebarNode title='a2'>
+              <SlidebarNode title='d' />
+              <SlidebarNode title='e' />
+            </SlidebarNode>
+          </SlidebarNode>
+        </SlidebarNode>
+        <SlidebarNode title='b'>
+          <SlidebarNode title='f' />
+          <SlidebarNode title='g' />
+        </SlidebarNode>
+        <SlidebarNode title='c'>
+          <SlidebarNode title='h' />
+          <SlidebarNode title='i' />
+        </SlidebarNode>
+      </SlidebarRoot>
+    </Slidebar>
+  )
+}
 
-  <Slidebar rootNode={rootNode} />
-            
-            `}</code>
-          </pre>
-          <h3>
-            Example <code>rootNode</code> object:
-          </h3>
-          <pre>
-            <code>
-              {`
-  {
-    name: "Root"
-    children: [
-      ...
-      {
-        name: "Example node",
-        children: [{ ... }, { ... }] />
-      }
-      ...
-    ]
-  }
-              `}
-            </code>
-          </pre>
-        </article>
-      </section>
-      <section>
-        <article>
-          <h2>Example with Components</h2>
-          <div className='example-wrapper'>
-            <Slidebar rootNode={exampleWithComponents} />
-          </div>
-          <h3>Component Props</h3>
-          <pre>
-            <code>{`
+function Layout() {
+  return (
+    <>
+      <header>
+        <h1>Examples</h1>
+      </header>
+      <main>
+        <section>
+          <article>
+            <NodesExample />
+          </article>
+        </section>
+      </main>
+    </>
+  )
+}
 
-  <Slidebar rootNode={rootNode} />
-            
-            `}</code>
-          </pre>
-          <h3>
-            Example <code>rootNode</code> object:
-          </h3>
-          <pre>
-            <code>
-              {`
-  {
-    name: "Root"
-    children: [
-      ...
-      {
-        name: "Example node",
-        component: ({...itemProps}) => <MyComponent {...itemProps} />
-      }
-      ...
-    ]
-  }
-              `}
-            </code>
-          </pre>
-        </article>
-      </section>
-      <section>
-        <article>
-          <h2>Example with Callback on Item</h2>
-          <div className='example-wrapper'>
-            <Slidebar rootNode={exampleWithCallback} />
-          </div>
-          <h3>Component Props</h3>
-          <pre>
-            <code>{`
-
-  <Slidebar rootNode={rootNode} />
-            
-            `}</code>
-          </pre>
-          <h3>
-            Example <code>rootNode</code> object:
-          </h3>
-          <pre>
-            <code>
-              {`
-  {
-    name: "Root"
-    children: [
-      ...
-      {
-        name: "Example node",
-        callback: (item) => alert(item.name)
-      }
-      ...
-    ]
-  }
-              `}
-            </code>
-          </pre>
-        </article>
-      </section>
-      <section>
-        <article>
-          <h2>Example with Callback on Transitions</h2>
-          <div className='example-wrapper'>
-            <Slidebar
-              rootNode={exampleBasic}
-              options={{
-                callbacks: {
-                  before: (item) => alert(`before, ${item.name}`),
-                  after: (item) => alert(`after, ${item.name}`)
-                }
-              }}
-            />
-          </div>
-          <h3>Component Props</h3>
-          <pre>
-            <code>{`
-  const options = {
-    callbacks: {
-      before: (item) => alert(item.name),
-      after: (item) => alert(item.name)
-    }
-  }
-
-  <Slidebar rootNode={rootNode} options={options} />
-            
-            `}</code>
-          </pre>
-        </article>
-      </section>
-      <section>
-        <article>
-          <h2>Example with Class Names</h2>
-          <div className='example-wrapper'>
-            <Slidebar
-              rootNode={exampleBasic}
-              options={{
-                classNames: {
-                  Slidebar: 'custom-class another-custom-class',
-                  Toolbar: 'custom-toolbar-class another-custom-toolbar-class'
-                }
-              }}
-            />
-          </div>
-          <h3>Component Props</h3>
-          <pre>
-            <code>{`
-  const options = {
-    classNames: {
-      Slidebar: 'custom-class another-custom-class',
-      Toolbar: 'custom-toolbar-class another-custom-toolbar-class'
-    }
-  }
-
-  <Slidebar rootNode={rootNode} options={options} />
-            
-            `}</code>
-          </pre>
-        </article>
-      </section>
-    </main>
-  </>
-)
-
-const App = () => {
+function App() {
   return <Layout />
 }
 
