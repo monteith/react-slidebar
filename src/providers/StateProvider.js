@@ -17,7 +17,6 @@ function StateProvider({ nodeTree, type, ...props }) {
   }
 
   if (type === 'nodes') {
-    console.log('nodes')
     history = [nodeTree]
     activeNode = nodeTree
   }

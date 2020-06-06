@@ -7,7 +7,7 @@ import findComponent from './helpers/findComponent'
 import getSlidebarType from './helpers/getSlidebarType'
 
 import _SlidebarHeader from './components/SlidebarHeader'
-import _SlidebarRoot from './components/SlidebarRoot'
+import _SlidebarItems from './components/SlidebarItems'
 import _SlidebarNode from './components/SlidebarNode'
 import _SlidebarPage from './components/SlidebarPage'
 
@@ -16,14 +16,14 @@ function initSlidebar({ children, title, options, ...props }) {
     throw new Error('This works better with children')
   }
 
-  const rootNode = findComponent(children, _SlidebarRoot)
+  const rootNode = findComponent(children, _SlidebarItems)
   const type = getSlidebarType(rootNode.props.children)
   const nodeTree = assignUuids(rootNode)
 
   if (!rootNode) {
-    throw new Error('A <SlidebarRoot/> must be provided')
+    throw new Error('A <SlidebarItems/> must be provided')
   } else if (!rootNode.props.children) {
-    throw new Error('<SlidebarRoot/> must have children')
+    throw new Error('<SlidebarItems/> must have children')
   }
 
   return (
@@ -35,7 +35,7 @@ function initSlidebar({ children, title, options, ...props }) {
 
 export const SlidebarNode = _SlidebarNode
 export const SlidebarPage = _SlidebarPage
-export const SlidebarRoot = _SlidebarRoot
+export const SlidebarItems = _SlidebarItems
 export const SlidebarHeader = _SlidebarHeader
 
 export { useSlidebarContext } from './providers/SlidebarProviders'

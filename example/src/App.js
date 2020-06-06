@@ -1,16 +1,17 @@
 import React from 'react'
 import Slidebar, {
-  SlidebarRoot,
+  SlidebarItems,
   SlidebarPage,
   SlidebarNode,
   SlidebarHeader
 } from 'react-slidebar'
 
+// eslint-disable-next-line no-unused-vars
 function PagesExample() {
   return (
     <Slidebar>
       <SlidebarHeader />
-      <SlidebarRoot>
+      <SlidebarItems>
         <SlidebarPage title='Page 1'>
           <h1>hi</h1>
           <SlidebarPage.BackButton />
@@ -26,7 +27,7 @@ function PagesExample() {
           <SlidebarPage.BackButton />
           <SlidebarPage.NextButton />
         </SlidebarPage>
-      </SlidebarRoot>
+      </SlidebarItems>
     </Slidebar>
   )
 }
@@ -35,7 +36,7 @@ function NodesExample() {
   return (
     <Slidebar>
       <SlidebarHeader />
-      <SlidebarRoot title='home'>
+      <SlidebarItems title='home'>
         <SlidebarNode title='a'>
           <SlidebarNode title='a1'>
             <SlidebarNode title='a2'>
@@ -52,7 +53,7 @@ function NodesExample() {
           <SlidebarNode title='h' />
           <SlidebarNode title='i' />
         </SlidebarNode>
-      </SlidebarRoot>
+      </SlidebarItems>
     </Slidebar>
   )
 }

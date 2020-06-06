@@ -6,17 +6,17 @@ import styled from '@emotion/styled'
 import SlidebarNode from './SlidebarNode'
 
 const StyledSlidebarItems = styled.div`
+  display: flex;
   position: relative;
 `
 
 const StyledSlidebarChildren = styled(animated.div)`
   align-items: center;
+
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  position: absolute;
+  justify-content: center;
   width: 100%;
-
   button {
     margin-bottom: 1rem;
   }
@@ -35,14 +35,32 @@ function SlidebarItems() {
     {
       from:
         direction === 'forward'
-          ? { opacity: 0, transform: 'translate3d(100%,0,0)' }
-          : { opacity: 0, transform: 'translate3d(-50%, 0, 0)' },
-      enter: { opacity: 1, transform: 'translate3d(0%,0,0)' },
+          ? {
+              opacity: 0,
+              transform: 'translate3d(100%,0,0)'
+            }
+          : {
+              opacity: 0,
+              transform: 'translate3d(-50%, 0, 0)'
+            },
+      enter: {
+        position: 'relative',
+        opacity: 1,
+        transform: 'translate3d(0%,0,0)'
+      },
 
       leave:
         direction === 'forward'
-          ? { opacity: 0, transform: 'translate3d(-50%,0,0)' }
-          : { opacity: 0, transform: 'translate3d(100%,0,0)' }
+          ? {
+              position: 'absolute',
+              opacity: 0,
+              transform: 'translate3d(-50%,0,0)'
+            }
+          : {
+              position: 'absolute',
+              opacity: 0,
+              transform: 'translate3d(100%,0,0)'
+            }
     }
   )
 
@@ -62,7 +80,6 @@ function SlidebarItems() {
   }
 
   function renderChild(node) {
-    console.log(hasSlidebarChildren(node))
     if (node.type === SlidebarNode && !hasSlidebarChildren(node)) {
       return React.cloneElement(node, {
         ...node.props,
